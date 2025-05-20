@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="./favicon_io/android-chrome-512x512.png"
+      sizes="64x64"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Finance Tracker - A Personal Finance App" />  
+    <link rel="stylesheet" href="support.css" />  
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.css"
+    />
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <title>Finance Tracker - A Personal Finance App</title>
+  </head>
+
+  <body>
+      <div class="page-wrapper">
+    <!-- <header class="header-part"> -->
+    <nav>
+      <div class="navbar">
+        <a href="#" class="logo"
+          ><i class="fas fa-chart-line"></i> Finance Tracker</a
+        >
+        <ul class="nav-links">
+  <li><a href="index.html" class="nav-link">Home</a></li>
+  <li><a href="#tracker" class="nav-link">Use Tracker</a></li>
+  <li><a href="#how-it-works" class="nav-link">How it works</a></li>
+  <li><a href="support.html" class="nav-link">Support</a></li>
+</ul>
+
+        <div class="buttons">
+          <a href="https://finance542.netlify.app/" class="btn-head"
+            ><i class="fas fa-sign-in-alt"></i> Log In</a
+          >
+          <a href="https://finance542.netlify.app/" class="btn-head"
+            ><i class="fas fa-user-plus"></i> Sign Up</a>
+          
+        </div>
+        <!-- <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div> -->
+      </div>
+    </nav>
+
+    <!-- Landing Page Content -->
+    <section class="section-box">
+      <div class="main-landing">
+        <div class="content">
+          <h1 class="under-welcome-h1">Take Control of Your Finances</h1>
+          <div class="under-h1"></div>
+          <p class="under-welcome-p">
+            Welcome to your personal finance tracker! Effortlessly manage your
+            income and expenses, set budgets, and achieve your financial goals.
+            Start tracking today for a brighter financial future!
+            </p>
+          <button class="under-welcome-btn" onclick="window.location.href='sign-up.html'">Sign Up Now</button>
+
+
+        </div>
+        <div class="under-welcome-image">
+        <img src="./assets/image-removebg-preview.png" alt="Power Finance" />
+        </div>
+      </div>
+    </section>
+    <br />
+    <div class="arrow">
+      <a href="#tracker " class="scroll-link">
+        <!-- <span></span> -->
+        <!-- <span></span> -->
+        <span></span>
+      </a>
+    </div>
+
+    <section class="main-content" id="tracker">
+      <div class="head-text">
+        <h1>Access Your Personal Finance Tracker</h1>
+        <div class="under-head-text"></div>
+      </div>
+      <br />
+
+<div class="tracker-part modern-card">
+  <!-- Balance Display -->
+  <div class="tracker-balance glassy-card">
+    <h2>Current Balance</h2>
+    <p id="balance" class="balance-value">₹0.00</p>
+  </div>
+
+  <!-- Currency & Date Filter -->
+  <div class="currency-date-filter modern-grid">
+    <div class="filter-block">
+      <label for="currency">Currency</label>
+      <select id="currency" onchange="updateBalance()">
+        <option value="USD">USD ($)</option>
+        <option value="EUR">EUR (€)</option>
+        <option value="INR" selected>INR (₹)</option>
+      </select>
+    </div>
+    <div class="filter-block">
+            <label for="date" style="margin-bottom: 0; margin-left: auto; display: block; text-align: right;">Date</label>
+            <input type="date" id="date" name="date" required max="" />
+    </div>
+  </div>
+
+  <!-- Transaction Form -->
+  <div class="transaction-form modern-flex">
+    <input type="text" id="description" placeholder="Description" />
+    <input type="number" id="amount" placeholder="Amount" />
+
+    <select id="type" name="type" required>
+      <option value="income">Income</option>
+      <option value="expense">Expense</option>
+    </select>
+
+    <select id="emotion" name="emotion" required>
+      <option value="" disabled selected>Mood</option>
+      <option value="Happy">😊 Happy</option>
+      <option value="Sad">😔 Sad</option>
+      <option value="Stressed">😟 Stressed</option>
+      <option value="Excited">🤩 Excited</option>
+      <option value="Neutral">😐 Neutral</option>
+    </select>
+
+    <button onclick="addTransaction()">➕ Add</button>
+    <button onclick="handleDownload()">⬇ Export</button>
+  </div>
+
+  <!-- Transaction Table -->
+  <div class="table-part glassy-card" id="table-part">
+    <table id="transaction-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Amount</th>
+          <th>Type</th>
+          <th>Emotion</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+
+
+    <section class="how-it-works" id="how-it-works">
+      <div class="head-text">
+        <h1>How it works</h1>
+        <div class="under-head-text"></div>
+      </div>
+      <br />
+      <div class="working-content">
+        <div class="left-working">
+          <h5 class="working-head">
+            Experience the power of
+            <span class="text-lightBlue">Personal Finance Tracker</span>
+          </h5>
+          <!-- <div class="under-h1"></div> -->
+          <ul class="ul-items">
+            <li class="check-list-items">
+              <i data-feather="check" class="feather icon-check"></i>
+              <span>Track effortlessly</span>
+            </li>
+            <li class="check-list-items">
+              <i data-feather="check" class="feather icon-check"></i>
+              <span>Control transactions</span>
+            </li>
+            <li class="check-list-items">
+              <i data-feather="check" class="feather icon-check"></i>
+              <span>Customize currencies</span>
+            </li>
+            <li class="check-list-items">
+              <i class="icon-check" data-feather="check"></i>
+              <span>Edit with ease</span>
+            </li>
+            <li class="check-list-items">
+              <i data-feather="check" class="feather icon-check"></i>
+              <span>Real-time balance</span>
+            </li>
+            <li class="check-list-items">
+              <i data-feather="check" class="feather icon-check"></i>
+              <span>Secure data protection</span>
+            </li>
+            <li class="check-list-items">
+            <i data-feather="bar-chart-2" class="feather icon-check"></i>
+            <span>
+              <strong>Spending by Emotion</strong><br />
+              <canvas id="emotionChart" width="400" height="200" style="margin-top: 10px;"></canvas>
+            </span>
+          </li>
+            <li class="check-list-items">
+
+          </ul>
+      <button class="under-welcome-btn" onclick="window.location.href='sign-up.html'">Sign Up Now</button>
+          <p class="-p">
+            
+          </p>    
+        </div>
+        <div class="right-working-image">
+          <!-- <div class="under-welcome-image"> -->
+          <img
+            src="./assets/FinanceTracker.png" alt="Power Finance" 
+            target="_self"
+            alt="Power Finance"
+          />
+          <!-- </div> -->
+        </div>
+      </div>
+    </section>
+    
+    <script>
+      feather.replace();
+    </script>
+    <script src="script.js"></script>
+    <script
+      src="https://kit.fontawesome.com/your-font-awesome-kit.js"
+      crossorigin="anonymous"
+    ></script>
+<script>
+  // Initialize the date input to today's date
+  document.getElementById("date").value = new Date().toISOString().split("T")[0];
+
+  // Function to update the balance display
+  function updateBalance() {
+    const currency = document.getElementById("currency").value;
+    const balance = document.getElementById("balance");
+    balance.textContent = `${currency} ${parseFloat(balance.textContent.replace(/[^0-9.-]+/g, "")).toFixed(2)}`;
+  }
+  // Function to add a transaction
+
+  // Initialize the emotion chart after DOM is loaded
+  document.addEventListener("DOMContentLoaded", function () {
+    const ctx = document.getElementById('emotionChart').getContext('2d');
+    // Example data, replace with your actual data as needed
+    const data = {
+      labels: ['Happy', 'Sad', 'Stressed', 'Excited', 'Neutral'],
+      datasets: [{
+        label: 'Spending by Emotion',
+        data: [12, 19, 3, 5, 2],
+        backgroundColor: [
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(255, 99, 132, 0.6)',
+          'rgba(255, 206, 86, 0.6)',
+          'rgba(54, 162, 235, 0.6)',
+          'rgba(201, 203, 207, 0.6)'
+        ],
+        borderColor: [
+          'rgba(75, 192, 192, 1)',
+          'rgba(255, 99, 132, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(201, 203, 207, 1)'
+        ],
+        borderWidth: 1
+      }]
+    };
+    new Chart(ctx, {
+      type: 'bar',
+      data: data,
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  });
+</script>
+<!-- Firebase Init (only on index.html) -->
+<script type="module" src="firebase-init.js"></script>

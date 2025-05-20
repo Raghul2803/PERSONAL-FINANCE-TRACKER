@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/x-icon" href="./favicon_io/android-chrome-512x512.png" sizes="64x64">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finance Tracker - Support</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="support.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="navbar">
+      <a href="#" class="logo"><i class="fas fa-chart-line"></i> Finance Tracker</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#tracker">Use Tracker</a></li>
+        <li><a href="index.html#how-it-works">How it works</a></li>
+        <li><a href="support.html">Support</a></li>
+      </ul>
+      <div class="buttons">
+        <a href="login.html" class="btn-head"><i class="fas fa-sign-in-alt"></i> Log In</a>
+        <a href="sign-up.html" class="btn-head"><i class="fas fa-user-plus"></i> Sign Up</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Support Form Section -->
+  <main>
+    <div class="container">
+      <form class="signup-form" id="supportForm">
+        <h2>How can we help you?</h2>
+
+        <div class="form-group">
+          <label for="fullname">Full Name <span>*</span></label>
+          <input type="text" id="fullname" name="fullname" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address <span>*</span></label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="emotion">How are you feeling? <span>*</span></label>
+          <div id="emotion-options">
+            <button type="button" class="emotion-btn" data-emotion="😊">😊</button>
+            <button type="button" class="emotion-btn" data-emotion="😐">😐</button>
+            <button type="button" class="emotion-btn" data-emotion="😔">😔</button>
+          </div>
+          <input type="hidden" id="selectedEmotion" name="emotion" required>
+        </div>
+
+        <div class="form-group">
+          <label for="query">Query <span>*</span></label>
+          <textarea name="query" id="query" required></textarea>
+        </div>
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer">
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    feather.replace();
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const emotionButtons = document.querySelectorAll(".emotion-btn");
+      const emotionInput = document.getElementById("selectedEmotion");
+
+      emotionButtons.forEach(button => {
+        button.addEventListener("click", () => {
+          emotionButtons.forEach(btn => btn.classList.remove("selected"));
+          button.classList.add("selected");
+          emotionInput.value = button.dataset.emotion;
+        });
+      });
+
+      const form = document.getElementById("supportForm");
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        if (!emotionInput.value) {
+          alert("Please select how you are feeling.");
+          return;
+        }
+
+        const data = {
+          fullname: form.fullname.value,
+          email: form.email.value,
+          emotion: emotionInput.value,
+          query: form.query.value
+        };
+
+        console.log("Form submitted with:", data);
+        alert("Thank you for your feedback!");
+
+        form.reset();
+        emotionButtons.forEach(b => b.classList.remove("selected"));
+      });
+    });
+  </script>
+  
+</body>
+</html>
